@@ -1,6 +1,7 @@
 class AppStr {
   static const String mainTitle = 'Mes Tasks';
-  static const String deletedTask = 'Cette task a été envoyé dans les enfers😈';
+  // static const String deletedTask = 'Cette task a été envoyé dans les enfers😈';
+  static const String deletedTask = 'Cette task rejoint les enfers😈';
   static const String doneAllTask = 'T\'as fait toutes les taches boss🎉';
   static const String addNewTask = 'Nouvelle tache';
   static const String updateCurrentTask = 'Modifier';
