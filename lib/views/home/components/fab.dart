@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_todo_app/utils/app_colors.dart';
+import 'package:my_todo_app/views/tasks/task_view.dart';
 
 class fab extends StatelessWidget {
   const fab({
@@ -11,6 +13,11 @@ class fab extends StatelessWidget {
     return FloatingActionButton(
       onPressed: () {
         print('Task view');
+        // Navigate to task view
+        Navigator.push(
+          context,
+          CupertinoPageRoute(builder: (context) => const TaskView()),
+        );
       },
       elevation: 10,
       child: Container(
