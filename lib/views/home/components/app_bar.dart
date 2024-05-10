@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:my_todo_app/utils/app_dimensions.dart';
+import 'package:my_todo_app/utils/constants.dart';
 
 class HomeAppBar extends StatefulWidget {
   const HomeAppBar({super.key, required this.drawerKey});
@@ -12,7 +13,8 @@ class HomeAppBar extends StatefulWidget {
   State<HomeAppBar> createState() => _HomeAppBarState();
 }
 
-class _HomeAppBarState extends State<HomeAppBar> with SingleTickerProviderStateMixin {
+class _HomeAppBarState extends State<HomeAppBar>
+    with SingleTickerProviderStateMixin {
   late AnimationController animateController;
   bool isMenuOpen = false;
 
@@ -57,33 +59,33 @@ class _HomeAppBarState extends State<HomeAppBar> with SingleTickerProviderStateM
           children: [
             // Menu Icon
             Padding(
-              padding: EdgeInsets.only(
-                left: AppDimensions.width(context) * 0.02
-              ),
+              padding:
+                  EdgeInsets.only(left: AppDimensions.width(context) * 0.02),
               child: IconButton(
-                onPressed: toggleMenu, 
-                icon: AnimatedIcon(
-                  icon: AnimatedIcons.menu_close,
-                  progress: animateController,
-                  size: 40,
-                )
-              ),
+                  onPressed: toggleMenu,
+                  icon: AnimatedIcon(
+                    icon: AnimatedIcons.menu_close,
+                    progress: animateController,
+                    size: 40,
+                  )),
             ),
 
             // Delete all tasks icon
             Padding(
-              padding: EdgeInsets.only(
-                right: AppDimensions.width(context) * 0.02
-              ),
+              padding:
+                  EdgeInsets.only(right: AppDimensions.width(context) * 0.02),
               child: IconButton(
-                onPressed: (){
-                  // Delete all tasks
-                }, 
-                icon: const Icon(
-                  CupertinoIcons.trash_circle_fill,
-                  size: 40,
-                )
-              ),
+                  onPressed: () {
+                    // Delete all tasks
+
+                    // tests section
+                    // noTaskWarning(context);
+                    deleteAllTasksWarning(context);
+                  },
+                  icon: const Icon(
+                    CupertinoIcons.trash_circle_fill,
+                    size: 40,
+                  )),
             )
           ],
         ),
