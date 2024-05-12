@@ -1,6 +1,7 @@
 //lotties aset adress
 import 'package:flutter/material.dart';
 import 'package:ftoast/ftoast.dart';
+import 'package:my_todo_app/main.dart';
 import 'package:my_todo_app/utils/app_str.dart';
 import 'package:panara_dialogs/panara_dialogs.dart';
 
@@ -20,7 +21,7 @@ dynamic emptyWarning(BuildContext context) {
 dynamic updateWarning(BuildContext context) {
   return FToast.toast(context,
       msg: AppStr.oopsMsg,
-      subMsg: 'Vous devez remplir tout les champs',
+      subMsg: 'Vous devez remplir tout les champs à modifier',
       corner: 20,
       duration: 5000,
       padding: const EdgeInsets.all(20));
@@ -40,7 +41,7 @@ dynamic noTaskWarning(BuildContext context) {
   );
 }
 
-dynamic deleteAllTasksWarning(BuildContext context) {
+dynamic deleteAllTasks(BuildContext context) {
   return PanaraConfirmDialog.show(
     context,
     title: AppStr.oopsMsg,
@@ -49,13 +50,13 @@ dynamic deleteAllTasksWarning(BuildContext context) {
     confirmButtonText: 'Wesh',
     onTapConfirm: () {
       // Clear all box data
-      // BaseWidget.of(context).dataStore.box.clear();
+      BaseWidget.of(context).dataStore.box.clear();
       Navigator.pop(context);
     },
     onTapCancel: () {
       Navigator.pop(context);
     },
     panaraDialogType: PanaraDialogType.error,
-    barrierDismissible: false
+    barrierDismissible: true
   );
 }

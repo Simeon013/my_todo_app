@@ -16,7 +16,11 @@ class fab extends StatelessWidget {
         // Navigate to task view
         Navigator.push(
           context,
-          CupertinoPageRoute(builder: (context) => const TaskView()),
+          CupertinoPageRoute(builder: (context) => const TaskView(
+            titleController: null,
+            descriptionController: null,
+            task: null
+          )),
         );
       },
       elevation: 10,

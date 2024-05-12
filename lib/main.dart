@@ -8,6 +8,9 @@ Future<void> main() async {
   // Initiative DB before run app
   await Hive.initFlutter();
 
+  // Enregistrez votre adaptateur TimeOfDayAdapter ici
+  Hive.registerAdapter(TimeOfDayAdapter());
+
   // Register adapter
   Hive.registerAdapter<Task>(TaskAdapter());
 
@@ -15,13 +18,15 @@ Future<void> main() async {
   Box box = await Hive.openBox<Task>(HiveDataStore.boxName);
 
   // Delete data from previous day
+  final now = DateTime.now();
   for (var task in box.values) {
-    if (task.createdAtTime.day != DateTime.now().day) {
+    if (task.createdAtDate.difference(now).inDays != 0) {
       task.delete();
     } else {
       // Do nothing
     }
   }
+
 
   runApp(BaseWidget(child: const MyApp()));
 }

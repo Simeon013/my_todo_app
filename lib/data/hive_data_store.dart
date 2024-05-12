@@ -11,7 +11,7 @@ class HiveDataStore {
   final Box<Task> box = Hive.box<Task>(boxName);
 
   // Add new task to box
-  Future addTask(Task task) async {
+  Future<void> addTask(Task task) async {
     // await box.add(task);
     await box.put(task.id, task);
   }

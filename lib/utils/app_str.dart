@@ -4,7 +4,7 @@ class AppStr {
   static const String deletedTask = 'Cette task rejoint les enfers😈';
   static const String doneAllTask = 'T\'as fait toutes les tasks boss🎉';
   static const String addNewTask = 'New ';
-  static const String updateCurrentTask = 'Modifier';
+  static const String updateCurrentTask = 'Modifier ';
   static const String deleteCurrentTask = 'Supprimer';
   static const String cancel = 'Annuler';
   static const String confirm = 'Confirmer';
@@ -15,7 +15,7 @@ class AppStr {
   static const String date = 'Date';
   static const String deleteTask = 'Supprimer tache';
   static const String addTaskString = 'Ajouter une task';
-  static const String updateTaskString = 'Modifier une task';
+  static const String updateTaskString = 'Modifier task';
   static const String oopsMsg = 'Oops!';
   static const String areYouSure = 'Etes-vous sur de vous🤔?';
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
@@ -22,7 +23,7 @@ class Task extends HiveObject {
   @HiveField(2) // Subtitle
   String subtitle;
   @HiveField(3) // Created At Time
-  DateTime createdAtTime;
+  TimeOfDay createdAtTime;
   @HiveField(4) // Created At Date
   DateTime createdAtDate;
   @HiveField(5) // Is Completed
@@ -32,14 +33,14 @@ class Task extends HiveObject {
   factory Task.create({
     required String? title,
     required String? subtitle,
-    DateTime? createdAtTime,
+    TimeOfDay? createdAtTime,
     DateTime? createdAtDate,
   }) {
     return Task(
       id: const Uuid().v1(),
       title: title ?? '',
       subtitle: subtitle ?? '',
-      createdAtTime: createdAtTime ?? DateTime.now(),
+      createdAtTime: createdAtTime ?? TimeOfDay.now(),
       createdAtDate: createdAtDate ?? DateTime.now(),
       isCompleted: false,
     );
