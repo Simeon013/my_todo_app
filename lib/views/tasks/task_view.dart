@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_todo_app/extensions/space_exs.dart';
@@ -7,7 +8,6 @@ import 'package:my_todo_app/utils/app_colors.dart';
 import 'package:my_todo_app/utils/app_dimensions.dart';
 import 'package:my_todo_app/utils/app_str.dart';
 import 'package:my_todo_app/utils/constants.dart';
-import 'package:my_todo_app/views/home/home_view.dart';
 import 'package:my_todo_app/views/tasks/components/datetime_selection.dart';
 import 'package:my_todo_app/views/tasks/components/rep_textfield.dart';
 import 'package:my_todo_app/views/tasks/widgets/app_bar.dart';
@@ -38,10 +38,12 @@ class _TaskViewState extends State<TaskView> {
   void _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
       context: context,
-      initialEntryMode: DatePickerEntryMode.input,
+      initialEntryMode: DatePickerEntryMode.calendar,
       firstDate: DateTime(2000, 1, 1),
-      lastDate: DateTime(2100, 1, 1),
-      initialDate: DateTime(2001, 12, 13),
+      lastDate: DateTime(2099, 10, 31),
+      initialDate: widget.task?.createdAtDate == null
+          ? DateTime.now()
+          : widget.task!.createdAtDate,
     );
 
     if (pickedDate != null) {
@@ -49,13 +51,13 @@ class _TaskViewState extends State<TaskView> {
         if (widget.task?.createdAtDate == null) {
           selectedDate = pickedDate;
         } else {
-          // selectedDate = widget.task?.createdAtDate;
-          widget.task!.createdAtDate = pickedDate;
+          selectedDate = widget.task?.createdAtDate;
+          // widget.task!.createdAtDate = pickedDate;
         }
       });
 
       // Faire quelque chose avec la date sélectionnée
-      print('Date sélectionnée : $selectedDate');
+      // print('Date sélectionnée : $selectedDate');
     }
   }
 
@@ -69,8 +71,10 @@ class _TaskViewState extends State<TaskView> {
   void _selectTime(BuildContext context) async {
     final TimeOfDay? pickedTime = await showTimePicker(
       context: context,
-      initialEntryMode: TimePickerEntryMode.input,
-      initialTime: const TimeOfDay(hour: 0, minute: 0),
+      initialEntryMode: TimePickerEntryMode.dial,
+      initialTime: widget.task?.createdAtTime == null
+          ? TimeOfDay.now()
+          : widget.task!.createdAtTime,
     );
 
     if (pickedTime != null) {
@@ -78,13 +82,15 @@ class _TaskViewState extends State<TaskView> {
         if (widget.task?.createdAtTime == null) {
           selectedTime = pickedTime;
         } else {
-          // selectedTime = widget.task?.createdAtTime;
-          widget.task!.createdAtTime = pickedTime;
+          selectedTime = widget.task?.createdAtTime;
+          // widget.task!.createdAtTime = pickedTime;
         }
       });
 
       // Faire quelque chose avec l'heure sélectionnée
-      print('Heure sélectionnée : $selectedTime');
+      if (kDebugMode) {
+        print('Heure sélectionnée : $selectedTime');
+      }
     }
   }
 
@@ -108,8 +114,11 @@ class _TaskViewState extends State<TaskView> {
     if (widget.titleController?.text != null &&
         widget.descriptionController?.text != null) {
       try {
-        widget.titleController!.text = title;
-        widget.descriptionController!.text = subtitle;
+        title = widget.task!.title;
+        subtitle = widget.task!.subtitle;
+        // widget.titleController!.text = title;
+        // widget.descriptionController!.text = subtitle;
+
 
         widget.task?.save();
 
@@ -130,7 +139,7 @@ class _TaskViewState extends State<TaskView> {
 
         // we are adding task to database
         BaseWidget.of(context).dataStore.addTask(task);
-        
+
         Navigator.pop(context);
       } else {
         // Warning
@@ -267,9 +276,9 @@ class _TaskViewState extends State<TaskView> {
             },
             time: selectedDate != null
                 ? formattedDate(selectedDate!)
-
-                // TODO: update later
-                : formattedDate(DateTime(2000, 1, 1)),
+                : formattedDate(widget.task?.createdAtDate == null
+                    ? DateTime.now()
+                    : widget.task!.createdAtDate),
           ),
 
           // Time Selection
@@ -280,9 +289,9 @@ class _TaskViewState extends State<TaskView> {
             },
             time: selectedTime != null
                 ? formattedTime(selectedTime!)
-
-                // TODO: update later
-                : formattedTime(const TimeOfDay(hour: 12, minute: 30)),
+                : formattedTime(widget.task?.createdAtTime == null
+                    ? TimeOfDay.now()
+                    : widget.task!.createdAtTime),
             isTime: true,
           )
         ],

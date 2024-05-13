@@ -26,13 +26,16 @@ class RepTextField extends StatelessWidget {
       child: ListTile(
         title: TextFormField(
           controller: controller,
-          maxLines: !isForDescription ? 6 : null,
-          cursorHeight: !isForDescription ? 60 : null,
+          // autofocus: true,
+          textCapitalization: TextCapitalization.sentences,
+          minLines: !isForDescription ? null : 1,
+          maxLines: !isForDescription ? 5 : 3,
+          cursorHeight: !isForDescription ? 40 : null,
           style: const TextStyle(color: Colors.black),
           decoration: InputDecoration(
             border: isForDescription ? InputBorder.none : null,
             counter: Container(),
-            hintText: isForDescription ? AppStr.addNote : null,
+            hintText: isForDescription ? AppStr.addNote : 'Titre',
             prefixIcon: isForDescription
               ? const Icon(
                   Icons.bookmark_border,

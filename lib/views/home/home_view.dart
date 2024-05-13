@@ -30,7 +30,7 @@ class _HomeViewState extends State<HomeView> {
     if (task.isNotEmpty) {
       return task.length;
     } else {
-      return 3;
+      return 0;
     }
   }
 
@@ -101,7 +101,9 @@ class _HomeViewState extends State<HomeView> {
               width: 30,
               height: 30,
               child: CircularProgressIndicator(
-                value: doneTasks(tasks) / valueOfIndicator(tasks),
+                value: valueOfIndicator(tasks) != 0
+                  ? doneTasks(tasks) / valueOfIndicator(tasks)
+                  : 1,
                 backgroundColor: Colors.grey,
                 valueColor: const AlwaysStoppedAnimation(AppColors.primaryColor),
               ),
@@ -120,8 +122,9 @@ class _HomeViewState extends State<HomeView> {
                   style: textTheme.displayLarge,
                 ),
                 3.h,
-                Text(
-                  '${doneTasks(tasks)} / ${valueOfIndicator(tasks)} tasks éffectuées',
+                Text( valueOfIndicator(tasks) != 0
+                  ? '${doneTasks(tasks)} / ${valueOfIndicator(tasks)} tasks éffectuées'
+                  : 'Pas de tasks',
                   style: textTheme.titleMedium,
                 )
               ],

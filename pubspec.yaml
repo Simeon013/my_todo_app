@@ -44,6 +44,17 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   flutter_slider_drawer: ^2.1.3
+  flutter_native_splash: ^2.4.0
+
+flutter_native_splash:
+  color: "#371138"
+  # background_image: assets/img/bg.png
+  # background_image: assets/img/bg_splash.png
+  image: assets/logo/4-icon.png
+  android_12:
+    # color: "#b06ab3"
+    background_image: assets/img/bg_splash.png
+    image: assets/logo/4-icon.png
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +84,7 @@ flutter:
   assets:
     - assets/img/
     - assets/lottie/
+    - assets/logo/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

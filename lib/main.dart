@@ -20,7 +20,7 @@ Future<void> main() async {
   // Delete data from previous day
   final now = DateTime.now();
   for (var task in box.values) {
-    if (task.createdAtDate.difference(now).inDays != 0) {
+    if (task.createdAtDate.difference(now).inyears != 0) {
       task.delete();
     } else {
       // Do nothing
